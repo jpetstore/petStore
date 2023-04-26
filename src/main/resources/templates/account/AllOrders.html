@@ -1,0 +1,56 @@
+<div th:replace="/common/header"></div>
+
+<div id = "BackLink">
+    <a href="/catalog/main">Return to Main Menu</a>
+</div>
+
+<div id="Catalog">
+    <table>
+        <thead>
+            <tr>
+                <td>订单ID</td>
+                <td>订单实付款</td>
+                <td>下单日期</td>
+                <td>操作</td>
+                <td>订单状态</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order:${orderList}">
+                <td th:text="${order.orderId}"></td>
+                <td th:text="${order.totalPrice}"></td>
+                <td th:text="${order.orderDate}"></td>
+                <td><button th:if="${order.status != '待退款' and order.status != '已退款' and order.status!='拒绝退款'}"  th:id="${order.orderId}" class="refundBtn" type="button">申请退款</button></td>
+                <td th:text="${order.status}"></td>
+                <script>
+                    // function confirmRefund(){
+                    //         var msg = prompt("若确认申请退款，请输入理由：");
+                    //         if(msg != null){
+                    //             var orderid = this.id;
+                    //             // var refundAmount = [[${order.totalPrice}]]
+                    //             alert(orderid)
+                    //             // alert("退款申请已提交")
+                    //             location.href = "/order/refundOrder?orderid=" + orderid + "&msg=" + msg //+ "&refundAmount=" + refundAmount;
+                    //             return true;
+                    //         }
+                    //         else return false;
+                    //     }
+                        window.onload = function (){
+                            var arr = document.getElementsByClassName("refundBtn")
+                            for (var i=0; i<arr.length; i++){
+                                arr[i].onclick = function (){
+                                    var msg = prompt("若确认申请退款，请提交理由：")
+                                    if(msg != null){
+                                        var orderid = this.id;
+                                        alert("退款申请已提交")
+                                        location.href = "/order/refundOrder?orderid=" + orderid + "&msg=" + msg
+                                    }
+                                }
+                            }
+                        }
+                    </script>
+                </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="/common/footer"></div>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.InventoryMapper">
+
+<!--    <resultMap id="ItemMap" type="org.csu.petstoremanage.domain.Item">-->
+<!--        <result column="attr1" property="attribute1"></result>-->
+<!--        <result column="attr2" property="attribute2"></result>-->
+<!--        <result column="attr3" property="attribute3"></result>-->
+<!--        <result column="attr4" property="attribute4"></result>-->
+<!--        <result column="attr5" property="attribute5"></result>-->
+<!--    </resultMap>-->
+
+    <update id="updateInventory" parameterType="org.csu.mypetstore.domain.Inventory">
+        UPDATE INVENTORY
+        SET ITEMID = #{itemId},
+            QTY = #{qty},
+            QTY_SOLD = #{qty_sold},
+            QTY_PRE = #{qty_pre},
+            QTY_ORDER = #{qty_order}
+        WHERE ITEMID = #{itemId}
+    </update>
+
+    <select id="getInventory" parameterType="String" resultType="org.csu.mypetstore.domain.Inventory">
+        SELECT
+--                ITEMID AS itemId
+--             QTY AS qty
+--          QTY_SOLD AS qty_sold
+--          QTY_PRE AS qty_pre
+--          QTY_ORDER AS qty_order
+*
+        FROM INVENTORY
+        WHERE ITEMID = #{itemId}
+    </select>
+
+
+
+
+</mapper>
